@@ -1,0 +1,126 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "心理学知识库数据结构",
+  "type": "object",
+  "properties": {
+    "knowledgeBase": {
+      "type": "array",
+      "description": "基础知识库，存储所有条目的详细信息",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "条目唯一标识符"
+          },
+          "title": {
+            "type": "string",
+            "description": "条目标题"
+          },
+          "definition": {
+            "type": "string",
+            "description": "概念定义"
+          },
+          "suggestion": {
+            "type": "string",
+            "description": "家长建议"
+          },
+          "tags": {
+            "type": "object",
+            "description": "标签分类",
+            "properties": {
+              "ageGroup": {
+                "type": "array",
+                "description": "年龄段标签",
+                "items": {
+                  "type": "string",
+                  "enum": ["0-3岁", "3-6岁", "6-12岁"]
+                }
+              },
+              "topic": {
+                "type": "array",
+                "description": "主题标签",
+                "items": {
+                  "type": "string",
+                  "examples": ["情绪管理", "社交能力", "学习能力"]
+                }
+              },
+              "scenario": {
+                "type": "array",
+                "description": "场景标签",
+                "items": {
+                  "type": "string",
+                  "examples": ["入园适应", "考试焦虑", "同伴交往"]
+                }
+              }
+            }
+          },
+          "relatedItems": {
+            "type": "array",
+            "description": "相关推荐条目ID列表",
+            "items": {
+              "type": "string"
+            }
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "创建时间"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "最后更新时间"
+          }
+        },
+        "required": ["id", "title", "content", "tags", "createdAt", "updatedAt"]
+      }
+    },
+    "tagIndex": {
+      "type": "object",
+      "description": "标签索引，用于快速检索",
+      "properties": {
+        "ageGroup": {
+          "type": "object",
+          "description": "年龄段索引",
+          "patternProperties": {
+            "^.*$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "条目ID"
+              }
+            }
+          }
+        },
+        "topic": {
+          "type": "object",
+          "description": "主题索引",
+          "patternProperties": {
+            "^.*$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "条目ID"
+              }
+            }
+          }
+        },
+        "scenario": {
+          "type": "object",
+          "description": "场景索引",
+          "patternProperties": {
+            "^.*$": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "description": "条目ID"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "required": ["knowledgeBase", "tagIndex"]
+}
