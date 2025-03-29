@@ -26,9 +26,9 @@ const SearchSection = ({ onFilterChange }) => {
 
   const topicOptions = [
     { value: '', label: '全部主题' },
-    { value: 'emotion', label: '情绪管理' },
-    { value: 'social', label: '社交能力' },
-    { value: 'learning', label: '学习能力' },
+    { value: '情绪管理', label: '情绪管理' },
+    { value: '社交能力', label: '社交能力' },
+    { value: '学习能力', label: '学习能力' },
   ];
 
   const handleFilterChange = (type, value) => {
@@ -45,11 +45,6 @@ const SearchSection = ({ onFilterChange }) => {
   return (
     <FilterSection>
       <Space direction="vertical" style={{ width: '100%' }} size="large">
-        <Input.Search
-          placeholder="请输入您关心的儿童心理问题"
-          enterButton={<SearchOutlined />}
-          size="large"
-        />
         <Space size="large">
           <Select
             placeholder="选择年龄段"

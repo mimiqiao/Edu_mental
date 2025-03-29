@@ -32,6 +32,7 @@ const InputContainer = styled.div`
 const StyledInput = styled(Input.TextArea)`
   flex: 1;
   border-radius: ${props => props.theme.borderRadius.medium};
+  min-height: 60px;
 `;
 
 const QAPage = () => {
@@ -82,7 +83,7 @@ const QAPage = () => {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="请输入您的问题..."
-          autoSize={{ minRows: 1, maxRows: 4 }}
+          autoSize={{ minRows: 2, maxRows: 6 }}
           onPressEnter={(e) => {
             if (!e.shiftKey) {
               e.preventDefault();
@@ -94,7 +95,7 @@ const QAPage = () => {
           type="primary" 
           icon={<SendOutlined />} 
           onClick={handleSend}
-          style={{ borderRadius: '12px', height: 'auto' }}
+          style={{ borderRadius: '12px', height: 'auto', width: '80px' }}
         />
       </InputContainer>
     </PageContainer>

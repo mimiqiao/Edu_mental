@@ -11,6 +11,50 @@ const valentinesDay = '/images/Notioly-Free-Pack/SVG/Valentine\'s-Day.svg';
 const summerCollection1 = '/images/Notioly-Free-Pack/SVG/Summer-Collection n.1.svg';
 const peace = '/images/Notioly-Free-Pack/SVG/Peace.svg';
 
+export const getIllustration = (id) => {
+  switch(id) {
+    case 'kb001': return affiliateProgram;
+    case 'kb002': return jumping;
+    case 'kb003': return painting;
+    case 'kb004': return planningTrip;
+    case 'kb005': return valentinesDay;
+    case 'kb007': return peace;
+    case 'kb006': return '/images/Notioly-Free-Pack/PNG/329_Package_Tracking_png.png';
+    case 'kb008': return '/images/Notioly-Free-Pack/PNG/410_Best_Friends_png.png';
+    case 'kb009': return '/images/Notioly-Free-Pack/PNG/312_New_Idea_png.png';
+    case 'kb010': return '/images/Notioly-Free-Pack/PNG/Caring.png';
+    case 'kb011': return '/images/Notioly-Free-Pack/PNG/301_Compass_png.png';
+    case 'kb012': return '/images/Notioly-Free-Pack/PNG/334_Give_Me_Five_png.png';
+    case 'kb013': return '/images/Notioly-Free-Pack/PNG/484_Riding_The_Bicycle_png.png';
+    case 'kb014': return '/images/Notioly-Free-Pack/PNG/321_Design_Tools_png.png';
+    case 'kb015': return '/images/Notioly-Free-Pack/PNG/Throwing_Away.png';
+    case 'kb016': return '/images/Notioly-Free-Pack/PNG/326_Building_Blocks_png.png';
+    case 'kb017': return '/images/Notioly-Free-Pack/PNG/327_Library_png.png';
+    case 'kb018': return '/images/Notioly-Free-Pack/PNG/328_Cup_Of_Coffee_png.png';
+    case 'kb019': return '/images/Notioly-Free-Pack/PNG/Growth.png';
+    case 'kb020': return '/images/Notioly-Free-Pack/PNG/332_Equilibrium_png.png';
+    case 'kb021': return '/images/Notioly-Free-Pack/PNG/335_Level_Of_Satisfaction_png.png';
+    case 'kb022': return '/images/Notioly-Free-Pack/PNG/Personal_Growth.png';
+    case 'kb023': return '/images/Notioly-Free-Pack/PNG/Take_Care.png';
+    case 'kb024': return '/images/Notioly-Free-Pack/PNG/322_Peace__png.png';
+    case 'kb025': return '/images/Notioly-Free-Pack/PNG/Calendar.png';
+    case 'kb026': return '/images/Notioly-Free-Pack/PNG/Baking.png';
+    case 'kb027': return '/images/Notioly-Free-Pack/PNG/Besties.png';
+    case 'kb028': return '/images/Notioly-Free-Pack/PNG/Hiring.png';
+    case 'kb029': return '/images/Notioly-Free-Pack/PNG/Architect.png';
+    case 'kb030': return '/images/Notioly-Free-Pack/PNG/Nosy_People.png';
+    case 'kb031': return '/images/Notioly-Free-Pack/PNG/331_Swing_Set_png.png';
+    case 'kb032': return '/images/Notioly-Free-Pack/PNG/Education.png';
+    case 'kb033': return '/images/Notioly-Free-Pack/PNG/333_Inspection_png.png';
+    case 'kb034': return '/images/Notioly-Free-Pack/PNG/Sending.png';
+    case 'kb035': return '/images/Notioly-Free-Pack/PNG/372_Selfie_png.png';
+    case 'kb036': return '/images/Notioly-Free-Pack/PNG/315_Knowledge_Base_png.png';
+    case 'kb037': return '/images/Notioly-Free-Pack/PNG/354_Pros_And_Cons_png.png';
+    case 'kb038': return '/images/Notioly-Free-Pack/PNG/352_Slot_Machine_png.png';
+    default: return affiliateProgram;
+  }
+};
+
 const { Title, Paragraph } = Typography;
 
 const TipsContainer = styled.div`
@@ -80,49 +124,7 @@ const TipsSection = ({ knowledgeItems, showAll = false }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isLoading, visibleItems, knowledgeItems.length]);
 
-  const getIllustration = (id) => {
-    switch(id) {
-      case 'kb001': return affiliateProgram;
-      case 'kb002': return jumping;
-      case 'kb003': return painting;
-      case 'kb004': return planningTrip;
-      case 'kb005': return valentinesDay;
-      case 'kb007': return peace;
-      case 'kb006': return '/images/Notioly-Free-Pack/PNG/329_Package_Tracking_png.png';
-      case 'kb008': return '/images/Notioly-Free-Pack/PNG/410_Best_Friends_png.png';
-      case 'kb009': return '/images/Notioly-Free-Pack/PNG/312_New_Idea_png.png';
-      case 'kb010': return '/images/Notioly-Free-Pack/PNG/Caring.png';
-      case 'kb011': return '/images/Notioly-Free-Pack/PNG/301_Compass_png.png';
-      case 'kb012': return '/images/Notioly-Free-Pack/PNG/334_Give_Me_Five_png.png';
-      case 'kb013': return '/images/Notioly-Free-Pack/PNG/484_Riding_The_Bicycle_png.png';
-      case 'kb014': return '/images/Notioly-Free-Pack/PNG/321_Design_Tools_png.png';
-      case 'kb015': return '/images/Notioly-Free-Pack/PNG/Throwing_Away.png';
-      case 'kb016': return '/images/Notioly-Free-Pack/PNG/326_Building_Blocks_png.png';
-      case 'kb017': return '/images/Notioly-Free-Pack/PNG/327_Library_png.png';
-      case 'kb018': return '/images/Notioly-Free-Pack/PNG/328_Cup_Of_Coffee_png.png';
-      case 'kb019': return '/images/Notioly-Free-Pack/PNG/Growth.png';
-      case 'kb020': return '/images/Notioly-Free-Pack/PNG/332_Equilibrium_png.png';
-      case 'kb021': return '/images/Notioly-Free-Pack/PNG/335_Level_Of_Satisfaction_png.png';
-      case 'kb022': return '/images/Notioly-Free-Pack/PNG/Personal_Growth.png';
-      case 'kb023': return '/images/Notioly-Free-Pack/PNG/Take_Care.png';
-      case 'kb024': return '/images/Notioly-Free-Pack/PNG/322_Peace__png.png';
-      case 'kb025': return '/images/Notioly-Free-Pack/PNG/Calendar.png';
-      case 'kb026': return '/images/Notioly-Free-Pack/PNG/Baking.png';
-      case 'kb027': return '/images/Notioly-Free-Pack/PNG/Besties.png';
-      case 'kb028': return '/images/Notioly-Free-Pack/PNG/Hiring.png';
-      case 'kb029': return '/images/Notioly-Free-Pack/PNG/Architect.png';
-      case 'kb030': return '/images/Notioly-Free-Pack/PNG/Nosy_People.png';
-      case 'kb031': return '/images/Notioly-Free-Pack/PNG/331_Swing_Set_png.png';
-      case 'kb032': return '/images/Notioly-Free-Pack/PNG/Education.png';
-      case 'kb033': return '/images/Notioly-Free-Pack/PNG/333_Inspection_png.png';
-      case 'kb034': return '/images/Notioly-Free-Pack/PNG/Sending.png';
-      case 'kb035': return '/images/Notioly-Free-Pack/PNG/372_Selfie_png.png';
-      case 'kb036': return '/images/Notioly-Free-Pack/PNG/315_Knowledge_Base_png.png';
-      case 'kb037': return '/images/Notioly-Free-Pack/PNG/354_Pros_And_Cons_png.png';
-      case 'kb038': return '/images/Notioly-Free-Pack/PNG/352_Slot_Machine_png.png';
-      default: return affiliateProgram;
-    }
-  };
+  
 
   const handleCardClick = (item) => {
     setSelectedItem(item);

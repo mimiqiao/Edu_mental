@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
-import { Layout, Menu, Card, Tag, Typography, Space } from 'antd';
+import { Layout, Menu, Card, Tag, Typography, Space, Button } from 'antd';
 import { HeartOutlined, BookOutlined, TeamOutlined } from '@ant-design/icons';
+import { useNavigate, useLocation } from 'react-router-dom';
 import SearchSection from './components/SearchSection';
 import exampleData from '../data/data.json';
 import TipsSection from './components/TipsSection';
 import { Link, Routes, Route } from 'react-router-dom';
 import QAPage from './pages/QAPage';
 import KnowledgeBasePage from './pages/KnowledgeBasePage';
+import GrowthMapPage from './pages/GrowthMapPage';
 
 const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
@@ -70,12 +72,22 @@ const StyledTag = styled(Tag)`
 `;
 
 const App = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   // 模拟数据
   const menuItems = [
     { key: 'home', icon: <HeartOutlined />, label: <Link to="/">首页</Link> },
     { key: 'knowledge', icon: <BookOutlined />, label: <Link to="/knowledge">锦囊库</Link> },
     { key: 'qa', icon: <TeamOutlined />, label: <Link to="/qa">智能问答</Link> },
+    { key: 'growth', icon: <TeamOutlined />, label: <Link to="/growth-map">成长地图</Link> },
   ];
+  
+  const [current, setCurrent] = useState(location.pathname === '/' ? 'home' : location.pathname.startsWith('/qa') ? 'qa' : location.pathname.split('/')[1] || 'home');
+  
+  useEffect(() => {
+    const path = location.pathname;
+    setCurrent(path === '/' ? 'home' : path.startsWith('/qa') ? 'qa' : path.split('/')[1] || 'home');
+  }, [location.pathname]);
 
   const ageOptions = [
     { value: '0-3', label: '0-3岁' },
@@ -107,12 +119,21 @@ const App = () => {
               <Title level={2} style={{ textAlign: 'center', marginBottom: 40 }}>
                 温暖贴心的儿童心理知识平台
               </Title>
-              <SearchSection />
               <TipsSection knowledgeItems={exampleData.knowledgeBase.slice(0, 6)} />
+              <div style={{ textAlign: 'center', marginTop: 24 }}>
+                <Button 
+                  type="primary" 
+                  onClick={() => navigate('/knowledge')}
+                  style={{ width: 200 }}
+                >
+                  查看更多锦囊
+                </Button>
+              </div>
             </>
           } />
           <Route path="/knowledge" element={<KnowledgeBasePage />} />
           <Route path="/qa" element={<QAPage />} />
+          <Route path="/growth-map" element={<GrowthMapPage />} />
         </Routes>
       </StyledContent>
     </StyledLayout>
