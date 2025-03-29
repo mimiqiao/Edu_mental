@@ -26,28 +26,12 @@ const SearchSection = () => {
 
   return (
     <>
-      
-      
       <Space direction="vertical" style={{ width: '100%' }} size="large">
         <Input.Search
-          placeholder="搜索您关心的儿童心理问题"
+          placeholder="请输入您关心的儿童心理问题"
           enterButton={<SearchOutlined />}
           size="large"
         />
-        <Space wrap>
-          <Select
-            placeholder="选择年龄段"
-            style={{ width: 120 }}
-            options={ageOptions}
-          />
-          <Select
-            placeholder="选择主题"
-            style={{ width: 120 }}
-            options={topicOptions}
-            mode="multiple"
-            maxTagCount={2}
-          />
-        </Space>
       </Space>
     </>
   );

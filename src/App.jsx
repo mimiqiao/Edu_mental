@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Layout, Menu, Card, Tag, Typography, Space } from 'antd';
 import { HeartOutlined, BookOutlined, TeamOutlined } from '@ant-design/icons';
 import SearchSection from './components/SearchSection';
-import exampleData from '../data/example_data.json';
+import exampleData from '../data/data.json';
 import TipsSection from './components/TipsSection';
 
 const { Header, Content } = Layout;
