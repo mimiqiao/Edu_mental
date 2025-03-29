@@ -1,7 +1,7 @@
 {
   "name": "edu-mental",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -17,7 +17,7 @@
     "puppeteer": "^21.11.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.21.0",
+    "react-router-dom": "^7.4.1",
     "styled-components": "^6.1.1"
   },
   "devDependencies": {

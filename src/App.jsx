@@ -5,6 +5,9 @@ import { HeartOutlined, BookOutlined, TeamOutlined } from '@ant-design/icons';
 import SearchSection from './components/SearchSection';
 import exampleData from '../data/data.json';
 import TipsSection from './components/TipsSection';
+import { Link, Routes, Route } from 'react-router-dom';
+import QAPage from './pages/QAPage';
+import KnowledgeBasePage from './pages/KnowledgeBasePage';
 
 const { Header, Content } = Layout;
 const { Title, Paragraph } = Typography;
@@ -69,9 +72,9 @@ const StyledTag = styled(Tag)`
 const App = () => {
   // 模拟数据
   const menuItems = [
-    { key: 'home', icon: <HeartOutlined />, label: '首页' },
-    { key: 'knowledge', icon: <BookOutlined />, label: '知识库' },
-    { key: 'qa', icon: <TeamOutlined />, label: '智能问答' },
+    { key: 'home', icon: <HeartOutlined />, label: <Link to="/">首页</Link> },
+    { key: 'knowledge', icon: <BookOutlined />, label: <Link to="/knowledge">锦囊库</Link> },
+    { key: 'qa', icon: <TeamOutlined />, label: <Link to="/qa">智能问答</Link> },
   ];
 
   const ageOptions = [
@@ -90,44 +93,27 @@ const App = () => {
     <StyledLayout>
       <StyledHeader>
         <Logo>
-          <HeartOutlined /> 儿童心理锦囊铺
+          <Link to="/">
+            <HeartOutlined /> 儿童心理锦囊铺
+          </Link>
         </Logo>
         <Menu mode="horizontal" items={menuItems} />
       </StyledHeader>
       
       <StyledContent>
-        <Title level={2} style={{ textAlign: 'center', marginBottom: 40 }}>
-          温暖贴心的儿童心理知识平台
-        </Title>
-        
-        <SearchSection />
-        
-        <TipsSection knowledgeItems={exampleData.knowledgeBase.slice(0, 6)} />
-
-        <div style={{ marginTop: 24 }}>
-          <KnowledgeCard>
-            <Title level={4}>如何帮助孩子克服分离焦虑？</Title>
-            <Space wrap>
-              <StyledTag color="pink">3-6岁</StyledTag>
-              <StyledTag color="gold">情绪管理</StyledTag>
-              <StyledTag color="cyan">入园适应</StyledTag>
-            </Space>
-            <Paragraph style={{ margin: '16px 0' }}>
-              分离焦虑是幼儿园适应期常见的情绪问题。本文将从心理学角度，为家长提供实用的应对策略...
-            </Paragraph>
-          </KnowledgeCard>
-
-          <KnowledgeCard>
-            <Title level={4}>培养孩子的同理心：从小做起的社交课</Title>
-            <Space wrap>
-              <StyledTag color="pink">0-3岁</StyledTag>
-              <StyledTag color="gold">社交能力</StyledTag>
-            </Space>
-            <Paragraph style={{ margin: '16px 0' }}>
-              同理心是社交能力的重要组成部分，良好的同理心有助于孩子建立和维护人际关系...
-            </Paragraph>
-          </KnowledgeCard>
-        </div>
+        <Routes>
+          <Route path="/" element={
+            <>
+              <Title level={2} style={{ textAlign: 'center', marginBottom: 40 }}>
+                温暖贴心的儿童心理知识平台
+              </Title>
+              <SearchSection />
+              <TipsSection knowledgeItems={exampleData.knowledgeBase.slice(0, 6)} />
+            </>
+          } />
+          <Route path="/knowledge" element={<KnowledgeBasePage />} />
+          <Route path="/qa" element={<QAPage />} />
+        </Routes>
       </StyledContent>
     </StyledLayout>
   );
