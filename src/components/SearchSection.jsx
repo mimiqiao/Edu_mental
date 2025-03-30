@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Input, Select, Space } from 'antd';
+import { Input, Select, Space, Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 
 const FilterSection = styled.div`
@@ -42,9 +42,32 @@ const SearchSection = ({ onFilterChange }) => {
     }
   };
 
+  const handleSearch = (e) => {
+    const searchText = e.target.value;
+    if (onFilterChange) {
+      onFilterChange({
+        ...filters,
+        searchText
+      });
+    }
+  };
+
   return (
     <FilterSection>
       <Space direction="vertical" style={{ width: '100%' }} size="large">
+        <Space.Compact style={{ width: '100%' }}>
+          <Input 
+            placeholder="搜索心理锦囊" 
+            size="large"
+            style={{ height: 40 }}
+            onChange={handleSearch}
+          />
+          <Button 
+            type="primary" 
+            icon={<SearchOutlined />} 
+            style={{ height: 40 }}
+          >搜索</Button>
+        </Space.Compact>
         <Space size="large">
           <Select
             placeholder="选择年龄段"

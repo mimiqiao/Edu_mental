@@ -120,19 +120,21 @@ const TipsSection = ({ knowledgeItems, showAll = false, onViewMore }) => {
         ))}
 
       </Row>
-      <div style={{ textAlign: 'center', marginTop: '24px' }}>
-        {isLoading ? (
-          <Button type="text" loading>加载中...</Button>
-        ) : (
-          <Button 
-            type="primary" 
-            onClick={onViewMore}
-            style={{ width: 200 }}
-          >
-            查看更多锦囊
-          </Button>
-        )}
-      </div>
+      {!showAll && (
+        <div style={{ textAlign: 'center', marginTop: '24px' }}>
+          {isLoading ? (
+            <Button type="text" loading>加载中...</Button>
+          ) : (
+            <Button 
+              type="primary" 
+              onClick={onViewMore}
+              style={{ width: 200 }}
+            >
+              查看更多锦囊
+            </Button>
+          )}
+        </div>
+      )}
       <Modal
         title={selectedItem?.title}
         open={selectedItem !== null}

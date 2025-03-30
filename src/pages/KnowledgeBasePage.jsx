@@ -21,10 +21,14 @@ const KnowledgeBasePage = () => {
 
   const handleFilterChange = (filters) => {
     const filtered = exampleData.knowledgeBase.filter(item => {
-      return (
-        (!filters.age || item.tags.ageGroup?.some(age => age.includes(filters.age))) &&
-        (!filters.topic || item.tags.topic?.some(topic => topic.includes(filters.topic)))
-      );
+      const matchesAge = !filters.age || item.tags.ageGroup?.some(age => age.includes(filters.age));
+      const matchesTopic = !filters.topic || item.tags.topic?.some(topic => topic.includes(filters.topic));
+      const matchesSearch = !filters.searchText || 
+        item.title.includes(filters.searchText) || 
+        item.definition.includes(filters.searchText) ||
+        item.suggestion.includes(filters.searchText);
+      
+      return matchesAge && matchesTopic && matchesSearch;
     });
     setFilteredData(filtered);
   };
@@ -35,6 +39,7 @@ const KnowledgeBasePage = () => {
       <TipsSection 
         knowledgeItems={filteredData} 
         showAll={true}
+        onViewMore={null}
       />
     </KnowledgePageContainer>
   );
