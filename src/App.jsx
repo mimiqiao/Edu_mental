@@ -102,11 +102,18 @@ const App = () => {
     { key: 'emotion', icon: <SmileOutlined />, label: <Link to="/emotion-diary">情绪观察</Link> },
   ];
   
-  const [current, setCurrent] = useState(location.pathname === '/' ? 'home' : location.pathname.split('/')[1] || 'home');
+  const getCurrentKey = (pathname) => {
+    if (pathname === '/') return 'home';
+    if (pathname.startsWith('/emotion-diary')) return 'emotion';
+    if (pathname.startsWith('/growth-map')) return 'growth';
+    if (pathname.startsWith('/knowledge')) return 'knowledge';
+    return 'home';
+  };
+  
+  const [current, setCurrent] = useState(getCurrentKey(location.pathname));
   
   useEffect(() => {
-    const path = location.pathname;
-    setCurrent(path === '/' ? 'home' : path.split('/')[1] || 'home');
+    setCurrent(getCurrentKey(location.pathname));
   }, [location.pathname]);
 
   const ageOptions = [
@@ -129,7 +136,7 @@ const App = () => {
             <HeartOutlined /> 儿童心理锦囊铺
           </Link>
         </Logo>
-        <Menu mode="horizontal" items={menuItems} />
+        <Menu mode="horizontal" items={menuItems} selectedKeys={[current]} />
       </StyledHeader>
       
       <StyledContent>

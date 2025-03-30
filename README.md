@@ -4,6 +4,10 @@
 
 ## 版本更新
 
+### 0.4.5
+- 新增情绪观察页面的AI建议功能
+- 优化导航选中状态显示
+
 ### 0.4.0
 - 新增情绪观察页面功能
 - 优化首页导航模块
@@ -38,6 +42,27 @@
 - 前端：React
 - 后端：Node.js
 - AI：OpenRoute API
+
+## 项目依赖
+
+### 核心依赖
+- React (@18.2.0) - 前端框架
+- react-router-dom (@7.4.1) - 路由管理
+- styled-components (@6.1.1) - CSS-in-JS解决方案
+- antd (@5.12.2) - UI组件库
+- @ant-design/icons (@5.2.6) - Ant Design图标库
+
+### 开发依赖
+- @vitejs/plugin-react (@4.2.1) - Vite的React插件
+- eslint (@8.55.0) - 代码检查工具
+- vite (@5.0.8) - 前端构建工具
+
+### 数据可视化
+- d3 (@7.9.0) - 数据可视化库
+
+### 爬虫工具
+- puppeteer (@21.11.0) - 无头浏览器
+- node-fetch (@3.3.2) - HTTP请求库
 
 ## 快速开始
 
