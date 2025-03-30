@@ -2,50 +2,35 @@ import React, { useState } from 'react';
 import * as d3 from 'd3';
 import styled from 'styled-components';
 import { Modal, Typography, Button, Tag } from 'antd';
+import KnowledgeCard, { IllustrationWrapper, StyledTag } from '../components/KnowledgeCard';
 import { theme } from '../styles/theme';
 import { getIllustration } from '../components/TipsSection';
+import TipsSection from '../components/TipsSection';
 import ageGroups from '../data/milestonesData';
 import exampleData from '../../data/data.json';
 
 const { Paragraph } = Typography;
 
-const IllustrationWrapper = styled.div`
-  margin: 16px 0;
-  text-align: center;
-  img {
-    width: 150px;
-    height: auto;
-  }
-`;
+import '../styles/GrowthMapPage.css';
 
-const StyledTag = styled(Tag)`
-  margin: 4px;
-  border-radius: 12px;
-  padding: 4px 12px;
-`;
 
-const TipTag = styled.div`
-  padding: 6px 10px;
-  background-color: ${props => props.theme.cardBackground};
-  border-radius: 4px;
-  border: 1px solid ${props => props.theme.primary};
-  color: ${props => props.theme.primary};
-  font-size: 12px;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  
-  &:hover {
-    background-color: ${props => props.theme.secondaryDark};
-    color: #0348C2;
-    border-color: ${props => props.theme.primary};
-  }
-`;
+
+
 
 const GrowthMapPage = () => {
   const getMilestoneDescription = (milestone) => {
     if (!milestone) return '';
     
-    // 从年龄组数据中查找匹配的里程碑描述
+    // 从data.json中查找匹配的锦囊内容
+    const tipData = exampleData.knowledgeBase.find(item => 
+      item.title === milestone
+    );
+    
+    if (tipData) {
+      return tipData;
+    }
+    
+    // 如果没有找到，再从年龄组数据中查找
     const ageGroup = ageGroups.find(age => 
       age.milestones.includes(milestone)
     );
@@ -244,13 +229,15 @@ const GrowthMapPage = () => {
     
     // 从知识库中获取锦囊内容
     const getTipContent = (tipId) => {
-      // 从data.json中获取锦囊内容
-      const knowledgeItem = exampleData.knowledgeBase.find(item => item.id === tipId);
-      return knowledgeItem || {
-        title: `${tipId.replace('kb', '')}`,
-        definition: `这是${tipId}的定义内容`,
-        detail: `这是${tipId}的详细说明`
-      };
+      // 从data.json中获取完整的锦囊内容
+      const knowledgeItem = exampleData.knowledgeBase.find(item => 
+        item.id === tipId || item.title === tipId
+      );
+      if (knowledgeItem) {
+        setSelectedItem(knowledgeItem);
+        return knowledgeItem;
+      }
+      return null;
     };
     
     return (
@@ -298,15 +285,16 @@ const GrowthMapPage = () => {
               
 
 {tipIds.map(tipId => (
-  <TipTag 
+  <StyledTag 
     key={tipId}
     onClick={() => {
       const tipContent = getTipContent(tipId);
+      // 直接使用对象，不进行任何序列化/反序列化操作
       setSelectedItem(tipContent);
     }}
   >
      {tipId.replace('kb', '')}
-  </TipTag>
+  </StyledTag>
               ))}
             </div>
           </div>
@@ -316,12 +304,12 @@ const GrowthMapPage = () => {
   };
 
   return (
-    <div className="growth-map-container" style={{ background: theme.background, padding: '20px', borderRadius: '8px' }}>
-      <h2 style={{ color: theme.primary, textAlign: 'center', marginBottom: '30px' }}>儿童心理成长地图</h2>
+    <div className="growth-map-container">
+      <h2>儿童心理成长地图</h2>
       {renderKnowledgeCard()}
       {selectedItem && (
         <Modal
-          title={selectedItem.title}
+          title={selectedItem?.title}
           open={selectedItem !== null}
           onCancel={() => setSelectedItem(null)}
           footer={null}
@@ -330,16 +318,16 @@ const GrowthMapPage = () => {
         >
           <div>
             <Paragraph>
-              <strong>定义：</strong>{selectedItem.definition}
+              <strong>定义：</strong>{selectedItem?.definition}
             </Paragraph>
             <IllustrationWrapper>
-              <img src={getIllustration(selectedItem.id)} alt={selectedItem.title} />
+              <img src={getIllustration(selectedItem?.id)} alt={selectedItem?.title} />
             </IllustrationWrapper>
             <Paragraph>
-              <strong>教育建议：</strong>{selectedItem.suggestion}
+              <strong>教育建议：</strong>{selectedItem?.suggestion}
             </Paragraph>
             <div style={{ marginTop: '16px' }}>
-              {selectedItem.tags?.topic?.map(tag => (
+              {selectedItem?.tags?.topic?.map(tag => (
                 <StyledTag key={tag} color="green">{tag}</StyledTag>
               ))}
             </div>
@@ -352,12 +340,7 @@ const GrowthMapPage = () => {
           width="800" 
           height="800"
           viewBox="-400 -400 800 800"
-          style={{ 
-            marginBottom: '20px', 
-            display: 'block', 
-            margin: '0 auto',
-            background: theme.background
-          }}
+          className="growth-map-svg"
         />
       </div>
     </div>

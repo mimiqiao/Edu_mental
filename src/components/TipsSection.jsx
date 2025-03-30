@@ -65,33 +65,8 @@ const TipsContainer = styled.div`
   box-shadow: ${props => props.theme.shadows.small};
 `;
 
-const TipsCard = styled(Card)`
-  margin-bottom: 24px;
-  border-radius: ${props => props.theme.borderRadius.medium};
-  border: 1px solid ${props => props.theme.colors.border};
-  transition: ${props => props.theme.transitions.default};
-  background: #fff9f9;
-  
-  &:hover {
-    transform: translateY(-4px);
-    box-shadow: ${props => props.theme.shadows.medium};
-  }
-`;
-
-const IllustrationWrapper = styled.div`
-  margin: 16px 0;
-  text-align: center;
-  img {
-    width: 150px;
-    height: auto;
-  }
-`;
-
-const StyledTag = styled(Tag)`
-  margin: 4px;
-  border-radius: 12px;
-  padding: 4px 12px;
-`;
+import KnowledgeCard, { StyledTag } from './KnowledgeCard';
+import { IllustrationWrapper } from './KnowledgeCard';
 
 const TipsTitle = styled(Title)`
   color: ${props => props.theme.colors.primary};
@@ -140,21 +115,7 @@ const TipsSection = ({ knowledgeItems, showAll = false }) => {
       <Row gutter={[24, 24]}>
         {knowledgeItems.slice(0, visibleItems).map(item => (
           <Col xs={24} sm={24} md={12} lg={8} key={item.id}>
-            <TipsCard onClick={() => handleCardClick(item)}>
-              <Title level={4}>{item.title}</Title>
-              <IllustrationWrapper>
-                <img src={getIllustration(item.id)} alt={item.title} />
-              </IllustrationWrapper>
-              <Paragraph>
-                <strong>定义：</strong>{item.definition}
-              </Paragraph>
-              <div>
-                {item.tags.topic.map(tag => (
-                  <StyledTag key={tag} color="green">{tag}</StyledTag>
-                ))}
-
-              </div>
-            </TipsCard>
+            <KnowledgeCard item={item} onClick={handleCardClick} />
           </Col>
         ))}
 
