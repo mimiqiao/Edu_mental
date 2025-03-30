@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import * as d3 from 'd3';
 import styled from 'styled-components';
 import { Modal, Typography, Button, Tag } from 'antd';
@@ -18,6 +19,12 @@ import '../styles/GrowthMapPage.css';
 
 
 const GrowthMapPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const getMilestoneDescription = (milestone) => {
     if (!milestone) return '';
     

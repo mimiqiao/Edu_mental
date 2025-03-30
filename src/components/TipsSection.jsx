@@ -73,7 +73,7 @@ const TipsTitle = styled(Title)`
   margin-bottom: 16px !important;
 `;
 
-const TipsSection = ({ knowledgeItems, showAll = false }) => {
+const TipsSection = ({ knowledgeItems, showAll = false, onViewMore }) => {
   const [selectedItem, setSelectedItem] = useState(null);
   const [visibleItems, setVisibleItems] = useState(18);
   const [isLoading, setIsLoading] = useState(false);
@@ -112,7 +112,7 @@ const TipsSection = ({ knowledgeItems, showAll = false }) => {
   return (
     <TipsContainer>
       <TipsTitle level={3}>心理锦囊</TipsTitle>
-      <Row gutter={[24, 24]}>
+      <Row gutter={[24, 24]} style={{ marginBottom: '24px' }}>
         {knowledgeItems.slice(0, visibleItems).map(item => (
           <Col xs={24} sm={24} md={12} lg={8} key={item.id}>
             <KnowledgeCard item={item} onClick={handleCardClick} />
@@ -120,11 +120,19 @@ const TipsSection = ({ knowledgeItems, showAll = false }) => {
         ))}
 
       </Row>
-      {isLoading && (
-        <div style={{ textAlign: 'center', marginTop: '24px' }}>
+      <div style={{ textAlign: 'center', marginTop: '24px' }}>
+        {isLoading ? (
           <Button type="text" loading>加载中...</Button>
-        </div>
-      )}
+        ) : (
+          <Button 
+            type="primary" 
+            onClick={onViewMore}
+            style={{ width: 200 }}
+          >
+            查看更多锦囊
+          </Button>
+        )}
+      </div>
       <Modal
         title={selectedItem?.title}
         open={selectedItem !== null}
